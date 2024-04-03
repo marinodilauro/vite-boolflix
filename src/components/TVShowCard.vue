@@ -60,11 +60,16 @@ export default {
 
     <div class="_card tvShow" :style="{ backgroundImage: `url(${tvShow.poster})` }">
 
-      <h4 class="text_overflow" id="tvShow_title"> {{ tvShow.title }} </h4>
-      <h6 class="text_overflow" id="original_title"> {{ tvShow.originalTitle }} </h6>
-      <p id="language"> {{ tvShow.flag }} </p>
-      <img class="language_flag rounded" :src="this.flag" alt="">
-      <p class="mt-2" id="vote"> <i v-for="vote in tvShow.vote" :key="vote" class="fa-solid fa-star me-1"></i> </p>
+      <div class="description">
+
+        <h4 class="text_overflow px-3 pt-2" id="tvShow_title"> {{ tvShow.title }} </h4>
+        <h6 class="text_overflow px-3" id="original_title"> {{ tvShow.originalTitle }} </h6>
+        <p id="language"> {{ tvShow.flag }} </p>
+        <img class="language_flag rounded mx-3" :src="this.flag" alt="">
+        <p class="mt-2 px-3" id="vote"> <i v-for="vote in tvShow.vote" :key="vote" class="fa-solid fa-star me-1"></i>
+        </p>
+
+      </div>
 
     </div>
 

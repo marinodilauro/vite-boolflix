@@ -17,13 +17,26 @@ body {
 }
 
 ._card {
+  position: relative;
   min-height: 467px;
-  padding: 1rem;
   background-color: #3b3a39;
   background-size: cover;
   background-position: center;
   background-repeat: no-repeat;
-  border: 1px solid black;
+  border-radius: 5px;
+
+  .description {
+    height: 100%;
+    width: 100%;
+    display: none;
+  }
+
+  &:hover .description {
+    position: absolute;
+    display: block;
+    background-color: rgba(0, 0, 0, 0.450);
+  }
+
 
   .language_flag {
     object-fit: cover;
