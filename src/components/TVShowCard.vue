@@ -3,7 +3,7 @@ import { state } from '../state.js';
 import axios from 'axios';
 
 export default {
-  name: 'MovieCard',
+  name: 'MTVShowCard',
   data() {
     return {
       state,
@@ -11,7 +11,6 @@ export default {
     }
   },
   props: {
-    movie: Object,
     tvShow: Object
   },
   methods: {
@@ -49,7 +48,7 @@ export default {
     }
   },
   mounted() {
-    this.getFlag(this.getCountryCode(this.state.movies[this.movie.id].lang));
+    this.getFlag(this.getCountryCode(this.state.tvShows[this.tvShow.id].lang));
   }
 }
 
@@ -60,11 +59,11 @@ export default {
   <div class="col">
 
     <div class="_card">
-      <h4 class="text_overflow" id="movie_title"> {{ movie.title }} </h4>
-      <h6 class="text_overflow" id="original_title"> {{ movie.originalTitle }} </h6>
-      <p id="language"> {{ movie.flag }} </p>
+      <h4 class="text_overflow" id="tvShow_title"> {{ tvShow.title }} </h4>
+      <h6 class="text_overflow" id="original_title"> {{ tvShow.originalTitle }} </h6>
+      <p id="language"> {{ tvShow.flag }} </p>
       <img class="rounded" :src="this.flag" alt="">
-      <p id="vote"> Voto: {{ movie.vote }} </p>
+      <p id="vote"> Voto: {{ tvShow.vote }} </p>
     </div>
 
   </div>

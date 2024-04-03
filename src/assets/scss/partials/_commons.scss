@@ -7,3 +7,22 @@
 body {
   font-family: 'Public Sans', sans-serif;
 }
+
+.text_overflow {
+  white-space: nowrap;
+  overflow: hidden;
+  text-overflow: ellipsis;
+}
+
+._card {
+  min-height: 350px;
+  padding: 1rem;
+  background-color: #efefef;
+  border: 1px solid black;
+
+  img {
+    object-fit: cover;
+    aspect-ratio: 1.5/1;
+    max-width: 50px;
+  }
+}
