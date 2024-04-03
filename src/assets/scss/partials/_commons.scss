@@ -6,6 +6,8 @@
 
 body {
   font-family: 'Public Sans', sans-serif;
+  height: 100vh;
+  overflow: hidden;
 }
 
 .text_overflow {
@@ -17,7 +19,6 @@ body {
 ._card {
   min-height: 467px;
   padding: 1rem;
-  color: white;
   background-color: #3b3a39;
   background-size: cover;
   background-position: center;
