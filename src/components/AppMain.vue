@@ -1,8 +1,12 @@
 <script>
+import MovieCard from './MovieCard.vue';
 import { state } from '../state.js';
 
 export default {
   name: 'AppMain',
+  components: {
+    MovieCard
+  },
   data() {
     return {
       state,
@@ -22,21 +26,14 @@ export default {
 
   </div>
 
-  <div class="container">
-    <div class="row row-cols-6 gy-1">
-      <div class="col" v-for="movie in this.state.movies">
+  <!-- Movie list -->
+  <section class="container mb-5">
+    <div class="row row-cols-5 g-3">
 
-        <div class="movie_card">
-          <h3 id="movie_title"> {{ movie.title }} </h3>
-          <h6 id="original_title"> {{ movie.originalTitle }} </h6>
-          <p id="language"> {{ movie.flag }} </p>
-          <img :src="movie.flag" alt="">
-          <p id="vote"> {{ movie.vote }} </p>
-        </div>
-      </div>
+      <MovieCard :movie="movie" v-for="movie in state.movies" />
+
     </div>
-
-  </div>
+  </section>
 
 </template>
 
