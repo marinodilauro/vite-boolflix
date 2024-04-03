@@ -29,7 +29,8 @@ export default {
         <div class="movie_card">
           <h3 id="movie_title"> {{ movie.title }} </h3>
           <h6 id="original_title"> {{ movie.originalTitle }} </h6>
-          <p id="language"> {{ movie.lang }} </p>
+          <p id="language"> {{ movie.flag }} </p>
+          <img :src="movie.flag" alt="">
           <p id="vote"> {{ movie.vote }} </p>
         </div>
       </div>
