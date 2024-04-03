@@ -36,7 +36,7 @@ export default {
 
     <h2>Movies</h2>
 
-    <div class="row row-cols-5 g-3">
+    <div class="row row-cols-4 g-3">
 
       <MovieCard :movie="movie" v-for="movie in state.movies" />
 
@@ -48,7 +48,7 @@ export default {
 
     <h2>TV Shows</h2>
 
-    <div class="row row-cols-5 g-3">
+    <div class="row row-cols-4 g-3">
 
       <TVShowCard :tvShow="tvShow" v-for="tvShow in state.tvShows" />
 

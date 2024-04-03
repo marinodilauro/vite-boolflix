@@ -59,12 +59,15 @@ export default {
 
   <div class="col">
 
-    <div class="_card">
+    <div class="_card movie" :style="{ backgroundImage: `url(${movie.poster})` }">
+
       <h4 class="text_overflow" id="movie_title"> {{ movie.title }} </h4>
       <h6 class="text_overflow" id="original_title"> {{ movie.originalTitle }} </h6>
       <p id="language"> {{ movie.flag }} </p>
-      <img class="rounded" :src="this.flag" alt="">
+      <img class="language_flag rounded" :src="this.flag" alt="">
       <p id="vote"> Voto: {{ movie.vote }} </p>
+
+
     </div>
 
   </div>

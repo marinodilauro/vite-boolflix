@@ -3,7 +3,7 @@ import { state } from '../state.js';
 import axios from 'axios';
 
 export default {
-  name: 'MTVShowCard',
+  name: 'TVShowCard',
   data() {
     return {
       state,
@@ -58,12 +58,14 @@ export default {
 
   <div class="col">
 
-    <div class="_card">
+    <div class="_card tvShow" :style="{ backgroundImage: `url(${tvShow.poster})` }">
+
       <h4 class="text_overflow" id="tvShow_title"> {{ tvShow.title }} </h4>
       <h6 class="text_overflow" id="original_title"> {{ tvShow.originalTitle }} </h6>
       <p id="language"> {{ tvShow.flag }} </p>
-      <img class="rounded" :src="this.flag" alt="">
+      <img class="language_flag rounded" :src="this.flag" alt="">
       <p id="vote"> Voto: {{ tvShow.vote }} </p>
+
     </div>
 
   </div>
