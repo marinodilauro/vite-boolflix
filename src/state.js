@@ -53,7 +53,7 @@ export const state = reactive({
           updatedMovie.originalTitle = movie.title;
           updatedMovie.title = movie.original_title;
           updatedMovie.lang = movie.original_language;
-          updatedMovie.vote = movie.vote_average;
+          updatedMovie.vote = parseInt(movie.vote_average / 2);
 
           /*           this.movie = {
                       id: index,
@@ -95,7 +95,7 @@ export const state = reactive({
           updatedTvShow.originalTitle = tvShow.name;
           updatedTvShow.title = tvShow.original_name;
           updatedTvShow.lang = tvShow.original_language;
-          updatedTvShow.vote = tvShow.vote_average;
+          updatedTvShow.vote = parseInt(tvShow.vote_average / 2);
 
           /*           this.tvShow = {
                       id: index,

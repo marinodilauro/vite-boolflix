@@ -64,7 +64,7 @@ export default {
       <h6 class="text_overflow" id="original_title"> {{ tvShow.originalTitle }} </h6>
       <p id="language"> {{ tvShow.flag }} </p>
       <img class="language_flag rounded" :src="this.flag" alt="">
-      <p id="vote"> Voto: {{ tvShow.vote }} </p>
+      <p class="mt-2" id="vote"> <i v-for="vote in tvShow.vote" :key="vote" class="fa-solid fa-star me-1"></i> </p>
 
     </div>
 

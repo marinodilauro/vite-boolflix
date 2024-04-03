@@ -65,7 +65,7 @@ export default {
       <h6 class="text_overflow" id="original_title"> {{ movie.originalTitle }} </h6>
       <p id="language"> {{ movie.flag }} </p>
       <img class="language_flag rounded" :src="this.flag" alt="">
-      <p id="vote"> Voto: {{ movie.vote }} </p>
+      <div class="mt-2" id="vote"> <i v-for="vote in movie.vote" :key="vote" class="fa-solid fa-star me-1"></i> </div>
 
 
     </div>
