@@ -7,6 +7,7 @@ export default {
   data() {
     return {
       state,
+      hovered: false,
       flag: ''
     }
   },
@@ -58,15 +59,17 @@ export default {
 
   <div class="col">
 
-    <div class="_card tvShow" :style="{ backgroundImage: `url(${tvShow.poster})` }">
+    <div class="_card tvShow" @mouseenter="this.hovered = true" @mouseleave="this.hovered = false"
+      :style="{ backgroundImage: `url(${tvShow.poster})` }">
 
-      <div class="description">
+      <div class="description" :class="{ hovered: hovered === true || tvShow.poster_path === null }">
 
-        <h4 class="text_overflow px-3 pt-2" id="tvShow_title"> {{ tvShow.title }} </h4>
-        <h6 class="text_overflow px-3" id="original_title"> {{ tvShow.originalTitle }} </h6>
-        <p id="language"> {{ tvShow.flag }} </p>
-        <img class="language_flag rounded mx-3" :src="this.flag" alt="">
-        <p class="mt-2 px-3" id="vote"> <i v-for="vote in tvShow.vote" :key="vote" class="fa-solid fa-star me-1"></i>
+        <h4 class="text_overflow px-3 my-4" id="tvShow_title"> {{ tvShow.title }} </h4>
+        <h6 class="text_overflow px-3 mb-4" id="original_title">Titolo originale: {{ tvShow.originalTitle }} </h6>
+        <div class="px-3 mb-4" id="language">Lingua: {{ tvShow.flag }}
+          <img class="language_flag rounded mx-3" :src="this.flag" alt="">
+        </div>
+        <p class="px-3" id="vote">Voto: <i v-for="vote in tvShow.vote" :key="vote" class="fa-solid fa-star me-1"></i>
         </p>
 
       </div>

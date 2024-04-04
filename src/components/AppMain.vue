@@ -40,7 +40,7 @@ export default {
 
       <h2>TV Shows</h2>
 
-      <div class="row row-cols-5 g-5">
+      <div class="row row-cols-4 g-5">
 
         <TVShowCard :tvShow="tvShow" v-for="tvShow in state.tvShows" />
 

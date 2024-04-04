@@ -7,6 +7,7 @@ export default {
   data() {
     return {
       state,
+      hovered: false,
       flag: ''
     }
   },
@@ -59,15 +60,17 @@ export default {
 
   <div class="col">
 
-    <div class="_card movie" :style="{ backgroundImage: `url(${movie.poster})` }">
+    <div class="_card movie" @mouseenter="this.hovered = true" @mouseleave="this.hovered = false"
+      :style="{ backgroundImage: `url(${movie.poster})` }">
 
-      <div class="description">
+      <div class="description" :class="{ hovered: hovered === true || movie.poster_path === null }">
 
-        <h4 class="text_overflow px-3 pt-2" id="movie_title"> {{ movie.title }} </h4>
-        <h6 class="text_overflow px-3" id="original_title"> {{ movie.originalTitle }} </h6>
-        <p class="px-2" id="language"> {{ movie.flag }} </p>
-        <img class="language_flag rounded mx-3" :src="this.flag" alt="">
-        <div class="mt-2 px-3" id="vote"> <i v-for="vote in movie.vote" :key="vote" class="fa-solid fa-star me-1"></i>
+        <h4 class="text_overflow px-3 my-4" id="movie_title"> {{ movie.title }} </h4>
+        <h6 class="text_overflow px-3 mb-4" id="original_title">Titolo originale: {{ movie.originalTitle }} </h6>
+        <div class="px-3 mb-4" id="language">Lingua: {{ movie.flag }}
+          <img class="language_flag rounded mx-3" :src="this.flag" alt="">
+        </div>
+        <div class="px-3" id="vote">Voto: <i v-for="vote in movie.vote" :key="vote" class="fa-solid fa-star me-1"></i>
         </div>
 
       </div>

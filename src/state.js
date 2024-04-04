@@ -55,18 +55,7 @@ export const state = reactive({
           updatedMovie.lang = movie.original_language;
           updatedMovie.vote = parseInt(movie.vote_average / 2);
 
-          /*           this.movie = {
-                      id: index,
-                      poster: this.movie.poster + movie.poster_path,
-                      originalTitle: movie.title,
-                      title: movie.original_title,
-                      lang: movie.original_language,
-                      vote: movie.vote_average
-                    } */
-
           this.movies.push(updatedMovie);
-
-          // this.movie.poster = 'https://image.tmdb.org/t/p/w185';
 
         });
 
@@ -97,17 +86,7 @@ export const state = reactive({
           updatedTvShow.lang = tvShow.original_language;
           updatedTvShow.vote = parseInt(tvShow.vote_average / 2);
 
-          /*           this.tvShow = {
-                      id: index,
-                      poster: this.tvShow.poster + tvShow.poster_path,
-                      originalTitle: tvShow.name,
-                      title: tvShow.original_name,
-                      lang: tvShow.original_language,
-                      vote: tvShow.vote_average
-                    } */
-
           this.tvShows.push(updatedTvShow);
-          // this.tvShow.poster = 'https://image.tmdb.org/t/p/w185';
 
         });
 

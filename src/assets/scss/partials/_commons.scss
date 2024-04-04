@@ -16,6 +16,7 @@ body {
   text-overflow: ellipsis;
 }
 
+
 ._card {
   position: relative;
   min-height: 467px;
@@ -26,17 +27,17 @@ body {
   border-radius: 5px;
 
   .description {
+    display: none;
     height: 100%;
     width: 100%;
-    display: none;
+    border-radius: 5px;
   }
 
-  &:hover .description {
+  .hovered {
     position: absolute;
     display: block;
     background-color: rgba(0, 0, 0, 0.450);
   }
-
 
   .language_flag {
     object-fit: cover;
@@ -45,6 +46,8 @@ body {
   }
 
   #vote {
-    color: gold;
+    i {
+      color: gold;
+    }
   }
 }
