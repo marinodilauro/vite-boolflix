@@ -6,7 +6,7 @@ export const state = reactive({
 
   // State (data)
   movie: {
-    id: '',
+    index: '',
     poster: 'https://image.tmdb.org/t/p/w300',
     originalTitle: '',
     title: '',
@@ -14,7 +14,7 @@ export const state = reactive({
     vote: ''
   },
   tvShow: {
-    id: '',
+    index: '',
     poster: 'https://image.tmdb.org/t/p/w300',
     originalTitle: '',
     title: '',
@@ -23,8 +23,8 @@ export const state = reactive({
   },
   movies: [],
   tvShows: [],
-  movies_search_api_url: 'https://api.themoviedb.org/3/search/movie?api_key=05ef2d511c8cbc2bd8832a8dfcbd5ff7&query=',
-  tvShows_search_api_url: 'https://api.themoviedb.org/3/search/tv?api_key=05ef2d511c8cbc2bd8832a8dfcbd5ff7&query=',
+  movies_search_api_url: 'https://api.themoviedb.org/3/search/movie?api_key=181a6823495c32659ae7407c099e7e8f&query=',
+  tvShows_search_api_url: 'https://api.themoviedb.org/3/search/tv?api_key=181a6823495c32659ae7407c099e7e8f&query=',
 
   // Actions that change the state
 
@@ -40,7 +40,7 @@ export const state = reactive({
     axios.get(this.movies_search_api_url + title)
       .then(response => {
 
-        console.log(response.data.results);
+        // console.log(response.data.results);
 
         moviesList = response.data.results;
 
@@ -48,7 +48,7 @@ export const state = reactive({
 
           const updatedMovie = { ...movie }
 
-          updatedMovie.id = index;
+          updatedMovie.index = index;
           updatedMovie.poster = this.movie.poster + movie.poster_path;
           updatedMovie.originalTitle = movie.title;
           updatedMovie.title = movie.original_title;
@@ -59,7 +59,7 @@ export const state = reactive({
 
         });
 
-        console.log(this.movies);
+        // console.log(this.movies);
 
       })
       .catch(err => {
@@ -71,7 +71,7 @@ export const state = reactive({
     axios.get(this.tvShows_search_api_url + title)
       .then(response => {
 
-        console.log(response.data.results);
+        // console.log(response.data.results);
 
         moviesList = response.data.results;
 
@@ -79,7 +79,7 @@ export const state = reactive({
 
           const updatedTvShow = { ...tvShow }
 
-          updatedTvShow.id = index;
+          updatedTvShow.index = index;
           updatedTvShow.poster = this.tvShow.poster + tvShow.poster_path;
           updatedTvShow.originalTitle = tvShow.name;
           updatedTvShow.title = tvShow.original_name;
@@ -90,13 +90,13 @@ export const state = reactive({
 
         });
 
-        console.log(this.tvShows);
+        // console.log(this.tvShows);
 
       })
       .catch(err => {
         console.error(err.message)
       })
 
-  },
+  }
 
 })
