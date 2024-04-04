@@ -63,15 +63,24 @@ export default {
     <div class="_card movie" @mouseenter="this.hovered = true" @mouseleave="this.hovered = false"
       :style="{ backgroundImage: `url(${movie.poster})` }">
 
-      <div class="description" :class="{ hovered: hovered === true || movie.poster_path === null }">
+      <div class="description py-3" :class="{ hovered: hovered === true || movie.poster_path === null }">
 
-        <h4 class="text_overflow px-3 my-4" id="movie_title"> {{ movie.title }} </h4>
-        <h6 class="text_overflow px-3 mb-4" id="original_title">Titolo originale: {{ movie.originalTitle }} </h6>
-        <div class="px-3 mb-4" id="language">Lingua: {{ movie.flag }}
+        <h4 class="text_overflow px-3 mb-4" id="movie_title"> {{ movie.title }} </h4>
+        <h6 class="text_overflow px-3 mb-4" id="original_title"><strong> Titolo originale: </strong>
+          {{ movie.originalTitle }}
+        </h6>
+        <div class="px-3 mb-4" id="language">
+          <strong> Lingua: </strong> {{ movie.flag }}
           <img class="language_flag rounded mx-3" :src="this.flag" alt="">
         </div>
-        <div class="px-3" id="vote">Voto: <i v-for="vote in movie.vote" :key="vote" class="fa-solid fa-star me-1"></i>
+        <div class="px-3 mb-4" id="vote" v-if="movie.vote > 0">
+          Voto: <i v-for="vote in movie.vote" :key="vote" class="fa-solid fa-star me-1"></i>
         </div>
+
+        <p class="overview px-3" v-if="movie.overview">
+          <strong> Descrizione: </strong>
+          {{ movie.overview }}
+        </p>
 
       </div>
 
