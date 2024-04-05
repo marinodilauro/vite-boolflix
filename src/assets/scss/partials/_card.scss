@@ -7,6 +7,17 @@
   background-repeat: no-repeat;
   border-radius: 5px;
 
+  .card_title {
+    position: relative;
+    background-color: #0000006b;
+    top: 85%;
+    left: 0%;
+  }
+
+  &:hover .card_title {
+    opacity: 0;
+  }
+
   .description {
     display: none;
     overflow-y: auto;
@@ -14,12 +25,15 @@
     height: 100%;
     max-height: 100%;
     width: 100%;
+    font-size: clamp(1rem, 4vw, 1.2rem);
     border-radius: 5px;
   }
 
-  .hovered {
-    position: absolute;
+  &:hover .description {
     display: block;
+    position: absolute;
+
+    top: 0%;
     background-color: rgba(0, 0, 0, 0.800);
   }
 

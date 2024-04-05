@@ -18,7 +18,7 @@ export default {
   <div id="header" class="d-flex justify-content-around align-items-center">
 
     <div class="logo py-3">
-      <img src="/public/images/boolflixLogo.png" alt="">
+      <img src="/public/images/boolflix_logo.png" alt="">
     </div>
 
     <!-- Searchbar -->

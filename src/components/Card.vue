@@ -231,10 +231,11 @@ export default {
 
   <template v-if="type === 'movies'">
 
-    <div class="_card movie" @mouseenter="this.hovered = true" @mouseleave="this.hovered = false"
-      :style="{ backgroundImage: `url(${element.poster})` }">
+    <div class="_card movie" :style="{ backgroundImage: `url(${element.poster})` }">
 
-      <div class="description" :class="{ hovered: hovered === true || element.poster_path === null }">
+      <h6 class="card_title text_overflow px-3 my-4"> {{ element.title }} </h6>
+
+      <div class="description">
 
         <h4 class="text_overflow px-3 my-4"> {{ element.title }} </h4>
 

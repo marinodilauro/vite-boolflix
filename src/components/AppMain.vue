@@ -25,11 +25,11 @@ export default {
 
   <div id="main">
 
-    <section class="my-4 m-auto" v-for="(result, type) in state.APIresults">
+    <section v-for="(result, type) in state.APIresults">
 
-      <h2 class="mb-4" v-if="result.length > 0"> {{ type.charAt(0).toUpperCase() + type.slice(1) }} </h2>
+      <h2 v-if="result.length > 0"> {{ type.charAt(0).toUpperCase() + type.slice(1) }} </h2>
 
-      <div class="row row-cols-5 g-5">
+      <div class="row row-cols-6 gx-2">
 
         <div class="col" v-for="element in result">
 

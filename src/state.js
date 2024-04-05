@@ -45,8 +45,13 @@ export const state = reactive({
         this.APIresults.movies.forEach((movie, index) => {
 
           movie.index = index;
-          movie.poster = 'https://image.tmdb.org/t/p/w300' + movie.poster_path;
           movie.vote = parseInt(movie.vote_average / 2);
+
+          if (movie.poster_path === null) {
+            movie.poster = '/images/poster_placeholder.jpg'
+          } else {
+            movie.poster = 'https://image.tmdb.org/t/p/w300' + movie.poster_path;
+          }
 
         });
         console.log(this.APIresults.movies);
@@ -56,8 +61,8 @@ export const state = reactive({
         this.APIresults.tvShows.forEach((tvShow, index) => {
 
           tvShow.index = index;
-          tvShow.poster = 'https://image.tmdb.org/t/p/w300' + tvShow.poster_path;
           tvShow.vote = parseInt(tvShow.vote_average / 2);
+          tvShow.poster = 'https://image.tmdb.org/t/p/w300' + tvShow.poster_path;
 
         });
         console.log(this.APIresults.tvShows);

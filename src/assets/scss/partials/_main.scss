@@ -5,6 +5,27 @@
   overflow-y: auto;
 
   section {
+    margin: 3rem auto;
     width: 90%;
+  }
+
+  section:first-child {
+    .col {
+      margin-top: 0.3rem;
+    }
+
+    h2 {
+      margin-bottom: 3rem;
+    }
+  }
+
+  section:last-child {
+    .col {
+      margin-top: 2rem;
+    }
+
+    h2 {
+      margin-bottom: 3rem;
+    }
   }
 }
