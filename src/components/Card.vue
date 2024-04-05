@@ -9,7 +9,14 @@ export default {
       state,
       hovered: false,
       flag: '',
-      mainActors: []
+      movieMainActors: [],
+      tvShowMainActors: [],
+
+      // API varaibles
+
+      details_api_url: 'https://api.themoviedb.org/3/',
+      movie_api_url: 'movie/',
+      tvShow_api_url: 'tv/',
     }
   },
   props: {
@@ -17,6 +24,7 @@ export default {
     type: String
   },
   methods: {
+
     getCountryCode(languageCode) {
 
       switch (languageCode) {
@@ -29,6 +37,9 @@ export default {
         case 'zh':
           languageCode = 'cn'
           break;
+        case 'ko':
+          languageCode = 'kr'
+          break;
         default:
           languageCode = languageCode
       }
@@ -36,12 +47,13 @@ export default {
       return languageCode;
 
     },
+
     async getFlag(countryCode) {
 
       await axios.get('https://restcountries.com/v3.1/alpha/' + countryCode)
         .then(response => {
 
-          console.log(response.data[0].flags.svg);
+          // console.log(response.data[0].flags.svg);
           this.flag = response.data[0].flags.svg;
 
         })
@@ -49,40 +61,86 @@ export default {
           console.error(err.message)
         })
     },
-    async getActors(movieIndex) {
 
-      await axios.get('https://api.themoviedb.org/3/movie/' + this.state.APIresults.movies[this.state.APIresults.movies.index].id + '/credits?api_key=181a6823495c32659ae7407c099e7e8f')
+    async getMovieActors(movieID) {
+
+      const url = `${this.details_api_url + this.movie_api_url + movieID + '/credits?' + state.api_key}`;
+
+      await axios.get(url)
         .then(response => {
 
           const actors = response.data.cast.slice(0, 5);
 
-          // console.log(actors);
+          //console.log(actors);
 
           actors.forEach((actor, index) => {
+
             let actorName;
 
             if (index < actors.length - 1) {
-              actorName = actor.name + ','
-
+              actorName = actor.name + ',';
             } else {
               actorName = actor.name;
             }
 
-            this.mainActors.push(actorName)
-          })
+            this.movieMainActors.push(actorName)
 
-          // console.log(this.mainActors);
+          });
+
+          //console.log(this.movieMainActors);
+
+
+        })
+        .catch(err => {
+          console.error(err.message)
+        })
+    },
+
+    async getTvShowActors(tvShowID) {
+
+      const url = `${this.details_api_url + this.tvShow_api_url + tvShowID + '/credits?' + state.api_key}`;
+
+      return await axios.get(url)
+        .then(response => {
+
+          const actors = response.data.cast.slice(0, 5);
+
+          //console.log(actors);
+
+          actors.forEach((actor, index) => {
+
+            let actorName;
+
+            if (index < actors.length - 1) {
+              actorName = actor.name + ',';
+            } else {
+              actorName = actor.name;
+            }
+
+            this.tvShowMainActors.push(actorName)
+
+          });
+
+          //console.log(this.tvShowMainActors);
 
         })
         .catch(err => {
           console.error(err.message)
         })
     }
-
   },
   mounted() {
-    /*     this.getFlag(this.getCountryCode(this.element[this.state.APIresults.movies.index].original_language));
-        this.getActors(this.element[this.state.APIresults.movies.index].id); */
+    this.getFlag(this.getCountryCode(this.element.original_language));
+
+    if (this.type === 'movies') {
+
+      this.getMovieActors(this.state.APIresults.movies[this.element.index].id)
+
+    } else {
+
+      this.getTvShowActors(this.state.APIresults.tvShows[this.element.index].id);
+
+    }
   }
 }
 
@@ -114,9 +172,11 @@ export default {
           {{ element.overview }}
         </p>
 
-        <p class="actors px-3" v-if="this.mainActors.length > 0">
+        <p class="actors px-3" v-if="this.movieMainActors.length > 0">
           <strong> Attori: </strong>
-          <span class="pe-2" v-for="actor in this.mainActors"> {{ actor }} </span>
+          <span class="pe-2" v-for="actor in this.movieMainActors">
+            {{ actor }}
+          </span>
         </p>
 
       </div>
@@ -150,9 +210,12 @@ export default {
           {{ element.overview }}
         </p>
 
-        <p class="actors px-3" v-if="this.mainActors.length > 0">
+        <p class="actors px-3" v-if="this.tvShowMainActors.length > 0">
           <strong> Attori: </strong>
-          <span class="pe-2" v-for="actor in this.mainActors"> {{ actor }} </span>
+          <span class="pe-2" v-for="actor in this.tvShowMainActors">
+            {{ actor }}
+          </span>
+
         </p>
 
       </div>

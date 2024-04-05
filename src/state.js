@@ -17,7 +17,6 @@ export const state = reactive({
   search_api_url: 'https://api.themoviedb.org/3/search/',
   movie_api_url: 'movie?',
   tvShow_api_url: 'tv?',
-  tvShows_search_api_url: 'https://api.themoviedb.org/3/search/',
 
   // Actions that change the state
 
@@ -63,6 +62,9 @@ export const state = reactive({
         });
         console.log(this.APIresults.tvShows);
 
+      })
+      .catch(err => {
+        console.error(err.message)
       })
 
   },
