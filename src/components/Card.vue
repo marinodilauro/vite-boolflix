@@ -13,7 +13,8 @@ export default {
     }
   },
   props: {
-    element: Object
+    element: Object,
+    type: String
   },
   methods: {
     getCountryCode(languageCode) {
@@ -89,31 +90,24 @@ export default {
 
 <template>
 
-  <template v-if="element === 'movies'">
+  <template v-if="type === 'movies'">
 
     <div class="_card movie" @mouseenter="this.hovered = true" @mouseleave="this.hovered = false"
       :style="{ backgroundImage: `url(${element.poster})` }">
 
-      <div class="description py-3" :class="{ hovered: hovered === true || element.poster_path === null }">
+      <div class="description" :class="{ hovered: hovered === true || element.poster_path === null }">
 
-        <h4 class="text_overflow px-3 mb-4">
-          {{ element.title }}
-        </h4>
+        <h4 class="text_overflow px-3 my-4"> {{ element.title }} </h4>
 
-        <h6 class="text_overflow px-3 mb-4">
-          <strong> Titolo originale: </strong>
+        <h6 class="text_overflow px-3 mb-4"> <strong> Titolo originale: </strong> {{ element.original_title }} </h6>
 
-        </h6>
-
-        <div class="px-3 mb-4" id="language">
-          <strong> Lingua: </strong>
-          {{ element.flag }}
+        <div class="px-3 mb-4" id="language"> <strong> Lingua: </strong> {{ element.flag }}
           <img class="language_flag rounded mx-3" :src="this.flag" alt="">
         </div>
 
-        <div class="px-3 mb-4" id="vote" v-if="element.vote > 0">
-          Voto: <i v-for="vote in element.vote" :key="vote" class="fa-solid fa-star me-1"></i>
-        </div>
+        <p class="vote px-3">
+          <strong> Voto: </strong> <i v-for="vote in element.vote" :key="vote" class="fa-solid fa-star me-1"></i>
+        </p>
 
         <p class="overview px-3" v-if="element.overview">
           <strong> Descrizione: </strong>
@@ -141,15 +135,14 @@ export default {
 
         <h4 class="text_overflow px-3 my-4"> {{ element.name }} </h4>
 
-        <h6 class="text_overflow px-3 mb-4">Titolo originale: {{ element.original_name }}
-        </h6>
+        <h6 class="text_overflow px-3 mb-4"> <strong> Titolo originale: </strong> {{ element.original_name }} </h6>
 
-        <div class="px-3 mb-4" id="language">Lingua: {{ element.flag }}
+        <div class="px-3 mb-4" id="language"> <strong> Lingua: </strong> {{ element.flag }}
           <img class="language_flag rounded mx-3" :src="this.flag" alt="">
         </div>
 
-        <p class="px-3" id="vote">
-          Voto: <i v-for="vote in element.vote" :key="vote" class="fa-solid fa-star me-1"></i>
+        <p class="vote px-3">
+          <strong> Voto: </strong> <i v-for="vote in element.vote" :key="vote" class="fa-solid fa-star me-1"></i>
         </p>
 
         <p class="overview px-3" v-if="element.overview">

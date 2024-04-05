@@ -33,7 +33,7 @@ export default {
 
         <div class="col" v-for="element in result">
 
-          <Card :element="element" />
+          <Card :element="element" :type="type" />
 
         </div>
 

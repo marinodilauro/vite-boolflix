@@ -47,6 +47,7 @@ export const state = reactive({
 
           movie.index = index;
           movie.poster = 'https://image.tmdb.org/t/p/w300' + movie.poster_path;
+          movie.vote = parseInt(movie.vote_average / 2);
 
         });
         console.log(this.APIresults.movies);
@@ -57,6 +58,7 @@ export const state = reactive({
 
           tvShow.index = index;
           tvShow.poster = 'https://image.tmdb.org/t/p/w300' + tvShow.poster_path;
+          tvShow.vote = parseInt(tvShow.vote_average / 2);
 
         });
         console.log(this.APIresults.tvShows);
