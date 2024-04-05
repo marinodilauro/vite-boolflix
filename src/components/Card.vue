@@ -263,6 +263,7 @@ export default {
           <strong> Voto </strong>
           <br>
           <i v-for="vote in element.vote" :key="vote" class="fa-solid fa-star my-2 me-1"></i>
+          <i v-for="emptyStars in (5 - element.vote)" :key="emptyStars" class="fa-regular fa-star my-2 me-1"></i>
         </p>
 
         <p class="overview px-3" v-if="element.overview">
@@ -320,6 +321,7 @@ export default {
           <strong> Voto </strong>
           <br>
           <i v-for="vote in element.vote" :key="vote" class="fa-solid fa-star my-2 me-1"></i>
+          <i v-for="emptyStars in (5 - element.vote) " :key="emptyStars" class="fa-regular fa-star my-2 me-1"></i>
         </p>
 
         <p class="overview px-3" v-if="element.overview">

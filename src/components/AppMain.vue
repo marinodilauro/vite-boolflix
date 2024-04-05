@@ -27,7 +27,7 @@ export default {
 
     <section class="my-4 m-auto" v-for="(result, type) in state.APIresults">
 
-      <h2 class="mb-4" v-if="result.length > 0"> {{ type }} </h2>
+      <h2 class="mb-4" v-if="result.length > 0"> {{ type.charAt(0).toUpperCase() + type.slice(1) }} </h2>
 
       <div class="row row-cols-5 g-5">
 
