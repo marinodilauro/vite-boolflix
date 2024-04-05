@@ -237,15 +237,15 @@ export default {
 
       <div class="description">
 
-        <h4 class="text_overflow px-3 my-4"> {{ element.title }} </h4>
+        <h4 class="text_overflow px-3 my-2"> {{ element.title }} </h4>
 
-        <h6 class="text_overflow px-3 mb-4">
+        <h6 class="text_overflow px-3 mb-2">
           <strong> Titolo originale </strong>
           <br>
           {{ element.original_title }}
         </h6>
 
-        <div class="genres px-3 mb-4">
+        <div class="genres px-3 mb-2">
           <strong> Genere </strong>
           <br>
           <span class="pe-2" v-for="genre in this.movieGenres">
@@ -253,21 +253,21 @@ export default {
           </span>
         </div>
 
-        <div class="language px-3 mb-4">
+        <div class="language px-3 mb-2">
           <strong> Lingua </strong>
           <br>
           {{ element.flag }}
-          <img class="language_flag rounded my-2" :src="this.flag" alt="">
+          <img class="language_flag rounded-1" :src="this.flag" alt="">
         </div>
 
-        <p class="vote px-3">
+        <p class="vote px-3 mb-2">
           <strong> Voto </strong>
           <br>
-          <i v-for="vote in element.vote" :key="vote" class="fa-solid fa-star my-2 me-1"></i>
-          <i v-for="emptyStars in (5 - element.vote)" :key="emptyStars" class="fa-regular fa-star my-2 me-1"></i>
+          <i v-for="vote in element.vote" :key="vote" class="fa-solid fa-star me-1"></i>
+          <i v-for="emptyStars in (5 - element.vote)" :key="emptyStars" class="fa-regular fa-star me-1"></i>
         </p>
 
-        <p class="overview px-3" v-if="element.overview">
+        <p class="overview px-3 mb-1" v-if="element.overview">
           <strong> Descrizione </strong>
           <br>
           {{ element.overview }}
@@ -295,15 +295,15 @@ export default {
 
       <div class="description" :class="{ hovered: hovered === true || element.poster_path === null }">
 
-        <h4 class="text_overflow px-3 my-4"> {{ element.name }} </h4>
+        <h4 class="text_overflow px-3 "> {{ element.name }} </h4>
 
-        <h6 class="text_overflow px-3 mb-4">
+        <h6 class="text_overflow px-3 mb-2">
           <strong> Titolo originale </strong>
           <br>
           {{ element.original_name }}
         </h6>
 
-        <div class="genres genres px-3 mb-4">
+        <div class="genres genres px-3 mb-2">
           <strong> Genere </strong>
           <br>
           <span class="pe-2" v-for="genre in this.tvShowsGenres">
@@ -311,21 +311,21 @@ export default {
           </span>
         </div>
 
-        <div class="language px-3 mb-4">
+        <div class="language px-3 mb-2">
           <strong> Lingua </strong>
           <br>
           {{ element.flag }}
-          <img class="language_flag rounded my-2" :src="this.flag" alt="">
+          <img class="language_flag rounded-1 mb-2" :src="this.flag" alt="">
         </div>
 
-        <p class="vote px-3">
+        <p class="vote px-3 mb-2">
           <strong> Voto </strong>
           <br>
           <i v-for="vote in element.vote" :key="vote" class="fa-solid fa-star my-2 me-1"></i>
           <i v-for="emptyStars in (5 - element.vote) " :key="emptyStars" class="fa-regular fa-star my-2 me-1"></i>
         </p>
 
-        <p class="overview px-3" v-if="element.overview">
+        <p class="overview px-3 mb-2" v-if="element.overview">
           <strong> Descrizione </strong>
           <br>
           {{ element.overview }}

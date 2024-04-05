@@ -1,52 +1,79 @@
-._card {
-  position: relative;
-  height: 467px;
-  background-color: #3b3a39;
-  background-size: cover;
-  background-position: center;
-  background-repeat: no-repeat;
-  border-radius: 5px;
+.col {
 
-  .card_title {
+  &:nth-child(1) ._card:hover,
+  &:nth-child(6n+1) ._card:hover {
+    transform-origin: 15% 50%;
+  }
+
+  &:nth-child(6n) ._card:hover {
+    transform-origin: 85% 50%;
+  }
+
+  ._card {
     position: relative;
-    background-color: #0000006b;
-    top: 85%;
-    left: 0%;
-  }
-
-  &:hover .card_title {
-    opacity: 0;
-  }
-
-  .description {
-    display: none;
-    overflow-y: auto;
-    scrollbar-width: none;
-    height: 100%;
-    max-height: 100%;
-    width: 100%;
-    font-size: clamp(1rem, 4vw, 1.2rem);
+    height: 220px;
+    background-color: #3b3a39;
+    background-size: cover;
+    background-position: center;
+    background-repeat: no-repeat;
     border-radius: 5px;
-  }
+    transition: transform ease-out 0.3s;
 
-  &:hover .description {
-    display: block;
-    position: absolute;
 
-    top: 0%;
-    background-color: rgba(0, 0, 0, 0.800);
-  }
+    &:hover {
+      transform: scale(1.8);
+      z-index: 99999;
+    }
 
-  .language_flag {
-    object-fit: cover;
-    aspect-ratio: 1.5/1;
-    max-width: 50px;
-  }
+    .card_title {
+      position: relative;
+      background-color: #0000006b;
+      top: 85%;
+      left: 0%;
+    }
 
-  .vote {
+    &:hover .card_title {
+      opacity: 0;
+    }
 
-    .fa-solid {
-      color: gold;
+    .description {
+      display: none;
+      overflow-y: auto;
+      scrollbar-width: none;
+      height: 100%;
+      max-height: 100%;
+      width: 100%;
+      font-size: 0.45rem;
+      border-radius: 5px;
+
+      h4 {
+        font-size: 0.9rem;
+      }
+
+      h6 {
+        font-size: 0.5rem;
+      }
+
+      .language_flag {
+        object-fit: cover;
+        aspect-ratio: 1.5/1;
+        max-width: 25px;
+      }
+
+      .vote {
+
+        .fa-solid {
+          color: gold;
+        }
+      }
+
+    }
+
+    &:hover .description {
+      display: block;
+      position: absolute;
+      top: 0%;
+      background-color: rgba(0, 0, 0, 0.800);
     }
   }
 }
