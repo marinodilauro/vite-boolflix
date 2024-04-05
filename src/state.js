@@ -5,30 +5,67 @@ import axios from 'axios';
 export const state = reactive({
 
   // State (data)
-  movie: {
-    index: '',
-    poster: 'https://image.tmdb.org/t/p/w300',
-    originalTitle: '',
-    title: '',
-    lang: '',
-    vote: ''
+
+  APIresults: {
+    movies: {},
+    tvShows: {},
   },
-  tvShow: {
-    index: '',
-    poster: 'https://image.tmdb.org/t/p/w300',
-    originalTitle: '',
-    title: '',
-    lang: '',
-    vote: ''
-  },
-  movies: [],
-  tvShows: [],
-  movies_search_api_url: 'https://api.themoviedb.org/3/search/movie?api_key=181a6823495c32659ae7407c099e7e8f&query=',
-  tvShows_search_api_url: 'https://api.themoviedb.org/3/search/tv?api_key=181a6823495c32659ae7407c099e7e8f&query=',
+
+  // API varaibles
+
+  api_key: 'api_key=181a6823495c32659ae7407c099e7e8f',
+  search_api_url: 'https://api.themoviedb.org/3/search/',
+  movie_api_url: 'movie?',
+  tvShow_api_url: 'tv?',
+  tvShows_search_api_url: 'https://api.themoviedb.org/3/search/',
 
   // Actions that change the state
 
-  searchMovieOrTvShow(title) {
+  searchMovie(movieTitle) {
+
+    const url = `${this.search_api_url + this.movie_api_url + this.api_key + '&query=' + movieTitle}`;
+    return axios.get(url)
+
+  },
+
+  searchTvShow(tvShowTitle) {
+
+    const url = `${this.search_api_url + this.tvShow_api_url + this.api_key + '&query=' + tvShowTitle}`;
+    return axios.get(url)
+
+  },
+
+  getResults(searchQuery) {
+
+    Promise.all([this.searchMovie(searchQuery), this.searchTvShow(searchQuery)])
+      .then(([movies, tvShows]) => {
+        console.log(movies.data, tvShows.data);
+
+        this.APIresults.movies = movies.data.results;
+
+        this.APIresults.movies.forEach((movie, index) => {
+
+          movie.index = index;
+          movie.poster = 'https://image.tmdb.org/t/p/w300' + movie.poster_path;
+
+        });
+        console.log(this.APIresults.movies);
+
+        this.APIresults.tvShows = tvShows.data.results;
+
+        this.APIresults.tvShows.forEach((tvShow, index) => {
+
+          tvShow.index = index;
+          tvShow.poster = 'https://image.tmdb.org/t/p/w300' + tvShow.poster_path;
+
+        });
+        console.log(this.APIresults.tvShows);
+
+      })
+
+  },
+
+  /* searchMovieOrTvShow(title) {
 
     this.movies = [];
     this.tvShows = [];
@@ -37,7 +74,10 @@ export const state = reactive({
     let tvShowsList = [];
 
     // Movie API call
-    axios.get(this.movies_search_api_url + title)
+
+
+
+    axios.get(this.api_key + this.title)
       .then(response => {
 
         // console.log(response.data.results);
@@ -97,6 +137,6 @@ export const state = reactive({
         console.error(err.message)
       })
 
-  }
+  } */
 
 })

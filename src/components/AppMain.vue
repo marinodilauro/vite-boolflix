@@ -1,18 +1,20 @@
 <script>
-import MovieCard from './MovieCard.vue';
-import TVShowCard from './TVShowCard.vue';
+import Card from './Card.vue';
 import { state } from '../state.js';
+
 
 export default {
   name: 'AppMain',
   components: {
-    MovieCard,
-    TVShowCard
+    Card
   },
   data() {
     return {
       state,
-      searchQuery: ''
+      searchQuery: '',
+      hovered: false,
+      flag: '',
+      mainActors: []
     }
   }
 }
@@ -23,28 +25,20 @@ export default {
 
   <div id="main">
 
-    <!-- Movie list -->
-    <section class="container mb-5" v-if="state.movies.length > 0">
+    <section class="my-4 m-auto" v-for="(result, type) in state.APIresults">
 
-      <h2>Movies</h2>
+      <h2 class="mb-4" v-if="result.length > 0"> {{ type }} </h2>
 
-      <div class="row row-cols-4 g-5">
+      <div class="row row-cols-5 g-5">
 
-        <MovieCard :movie="movie" v-for="movie in state.movies" />
+        <div class="col" v-for="element in result">
 
-      </div>
-    </section>
+          <Card :element="element" />
 
-    <!-- TV Show list -->
-    <section class="container mb-5" v-if="state.tvShows.length > 0">
-
-      <h2>TV Shows</h2>
-
-      <div class="row row-cols-4 g-5">
-
-        <TVShowCard :tvShow="tvShow" v-for="tvShow in state.tvShows" />
+        </div>
 
       </div>
+
     </section>
 
   </div>
