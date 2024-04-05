@@ -9,6 +9,8 @@ export default {
       state,
       hovered: false,
       flag: '',
+      movieGenres: [],
+      tvShowsGenres: [],
       movieMainActors: [],
       tvShowMainActors: [],
 
@@ -40,6 +42,9 @@ export default {
         case 'ko':
           languageCode = 'kr'
           break;
+        case 'da':
+          languageCode = 'dk'
+          break;
         default:
           languageCode = languageCode
       }
@@ -60,6 +65,76 @@ export default {
         .catch(err => {
           console.error(err.message)
         })
+    },
+
+    async getMovieGenres(movieID) {
+
+      const url = `${this.details_api_url + this.movie_api_url + movieID + '?' + state.api_key}`;
+
+      await axios.get(url)
+        .then(response => {
+
+          const genres = response.data.genres
+
+          console.log(genres);
+
+          genres.forEach((genre, index) => {
+
+            let genreName;
+
+            if (index < genres.length - 1) {
+              genreName = genre.name + ',';
+            } else {
+              genreName = genre.name;
+            }
+
+            this.movieGenres.push(genreName)
+
+          });
+
+          //console.log(this.movieMainActors);
+
+
+        })
+        .catch(err => {
+          console.error(err.message)
+        })
+
+    },
+
+    async gettvShowGenres(tvShowID) {
+
+      const url = `${this.details_api_url + this.movie_api_url + tvShowID + '?' + state.api_key}`;
+
+      await axios.get(url)
+        .then(response => {
+
+          const genres = response.data.genres
+
+          console.log(genres);
+
+          genres.forEach((genre, index) => {
+
+            let genreName;
+
+            if (index < genres.length - 1) {
+              genreName = genre.name + ',';
+            } else {
+              genreName = genre.name;
+            }
+
+            this.tvShowsGenres.push(genreName)
+
+          });
+
+          //console.log(this.movieMainActors);
+
+
+        })
+        .catch(err => {
+          console.error(err.message)
+        })
+
     },
 
     async getMovieActors(movieID) {
@@ -130,17 +205,23 @@ export default {
     }
   },
   mounted() {
+
     this.getFlag(this.getCountryCode(this.element.original_language));
 
     if (this.type === 'movies') {
 
       this.getMovieActors(this.state.APIresults.movies[this.element.index].id)
 
+      this.getMovieGenres(this.state.APIresults.movies[this.element.index].id);
+
     } else {
 
       this.getTvShowActors(this.state.APIresults.tvShows[this.element.index].id);
 
+      this.gettvShowGenres(this.state.APIresults.tvShows[this.element.index].id);
+
     }
+
   }
 }
 
@@ -157,23 +238,42 @@ export default {
 
         <h4 class="text_overflow px-3 my-4"> {{ element.title }} </h4>
 
-        <h6 class="text_overflow px-3 mb-4"> <strong> Titolo originale: </strong> {{ element.original_title }} </h6>
+        <h6 class="text_overflow px-3 mb-4">
+          <strong> Titolo originale </strong>
+          <br>
+          {{ element.original_title }}
+        </h6>
 
-        <div class="px-3 mb-4" id="language"> <strong> Lingua: </strong> {{ element.flag }}
-          <img class="language_flag rounded mx-3" :src="this.flag" alt="">
+        <div class="genres px-3 mb-4">
+          <strong> Genere </strong>
+          <br>
+          <span class="pe-2" v-for="genre in this.movieGenres">
+            {{ genre }}
+          </span>
+        </div>
+
+        <div class="language px-3 mb-4">
+          <strong> Lingua </strong>
+          <br>
+          {{ element.flag }}
+          <img class="language_flag rounded my-2" :src="this.flag" alt="">
         </div>
 
         <p class="vote px-3">
-          <strong> Voto: </strong> <i v-for="vote in element.vote" :key="vote" class="fa-solid fa-star me-1"></i>
+          <strong> Voto </strong>
+          <br>
+          <i v-for="vote in element.vote" :key="vote" class="fa-solid fa-star my-2 me-1"></i>
         </p>
 
         <p class="overview px-3" v-if="element.overview">
-          <strong> Descrizione: </strong>
+          <strong> Descrizione </strong>
+          <br>
           {{ element.overview }}
         </p>
 
         <p class="actors px-3" v-if="this.movieMainActors.length > 0">
-          <strong> Attori: </strong>
+          <strong> Attori </strong>
+          <br>
           <span class="pe-2" v-for="actor in this.movieMainActors">
             {{ actor }}
           </span>
@@ -195,23 +295,42 @@ export default {
 
         <h4 class="text_overflow px-3 my-4"> {{ element.name }} </h4>
 
-        <h6 class="text_overflow px-3 mb-4"> <strong> Titolo originale: </strong> {{ element.original_name }} </h6>
+        <h6 class="text_overflow px-3 mb-4">
+          <strong> Titolo originale </strong>
+          <br>
+          {{ element.original_name }}
+        </h6>
 
-        <div class="px-3 mb-4" id="language"> <strong> Lingua: </strong> {{ element.flag }}
-          <img class="language_flag rounded mx-3" :src="this.flag" alt="">
+        <div class="genres genres px-3 mb-4">
+          <strong> Genere </strong>
+          <br>
+          <span class="pe-2" v-for="genre in this.tvShowsGenres">
+            {{ genre }}
+          </span>
+        </div>
+
+        <div class="language px-3 mb-4">
+          <strong> Lingua </strong>
+          <br>
+          {{ element.flag }}
+          <img class="language_flag rounded my-2" :src="this.flag" alt="">
         </div>
 
         <p class="vote px-3">
-          <strong> Voto: </strong> <i v-for="vote in element.vote" :key="vote" class="fa-solid fa-star me-1"></i>
+          <strong> Voto </strong>
+          <br>
+          <i v-for="vote in element.vote" :key="vote" class="fa-solid fa-star my-2 me-1"></i>
         </p>
 
         <p class="overview px-3" v-if="element.overview">
-          <strong> Descrizione: </strong>
+          <strong> Descrizione </strong>
+          <br>
           {{ element.overview }}
         </p>
 
         <p class="actors px-3" v-if="this.tvShowMainActors.length > 0">
-          <strong> Attori: </strong>
+          <strong> Attori </strong>
+          <br>
           <span class="pe-2" v-for="actor in this.tvShowMainActors">
             {{ actor }}
           </span>

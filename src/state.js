@@ -66,7 +66,6 @@ export const state = reactive({
       .catch(err => {
         console.error(err.message)
       })
-
   }
 
 })
