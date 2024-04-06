@@ -12,9 +12,13 @@ export default {
     return {
       state,
       searchQuery: '',
-      hovered: false,
       flag: '',
-      mainActors: []
+      filtered: false
+    }
+  },
+  methods: {
+    filterByGenres(genre) {
+      console.log(genre);
     }
   }
 }
@@ -28,6 +32,23 @@ export default {
     <section v-for="(result, type) in state.APIresults">
 
       <h2 v-if="result.length > 0"> {{ type.charAt(0).toUpperCase() + type.slice(1) }} </h2>
+
+      <div class="filter_by_genres" v-if="result.length > 0">
+        <strong>Filter by genres</strong>
+
+        <div class="genres d-flex gap-3 mt-2" v-if="type === 'movies'">
+          <div class="genre fw-semibold" v-for="genre in state.searchedMovieGenres" @click="filterByGenres(genre)">
+            {{ genre }}
+          </div>
+        </div>
+
+        <div class="genres d-flex gap-3 mt-2" v-else>
+          <div class="genre fw-semibold" v-for="genre in state.searchedTvShowsGenres" @click="filterByGenres(genre)">
+            {{ genre }}
+          </div>
+        </div>
+
+      </div>
 
       <div class="row row-cols-6 gx-2">
 

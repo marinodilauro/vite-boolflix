@@ -88,17 +88,24 @@ export default {
               genreName = genre.name;
             }
 
-            this.movieGenres.push(genreName)
+            if (!this.state.searchedMovieGenres.includes(genre.name)) {
+              this.state.searchedMovieGenres.push(genre.name)
+            }
 
+            this.movieGenres.push(genreName)
           });
 
+          this.$emit('this.movieGenres');
           //console.log(this.movieMainActors);
-
 
         })
         .catch(err => {
           console.error(err.message)
         })
+
+    },
+
+    emitGenre() {
 
     },
 
@@ -111,7 +118,7 @@ export default {
 
           const genres = response.data.genres
 
-          console.log(genres);
+          // console.log(genres);
 
           genres.forEach((genre, index) => {
 
@@ -121,6 +128,10 @@ export default {
               genreName = genre.name + ',';
             } else {
               genreName = genre.name;
+            }
+
+            if (!this.state.searchedTvShowsGenres.includes(genre.name)) {
+              this.state.searchedTvShowsGenres.push(genre.name)
             }
 
             this.tvShowsGenres.push(genreName)
@@ -221,6 +232,8 @@ export default {
       this.gettvShowGenres(this.state.APIresults.tvShows[this.element.index].id);
 
     }
+
+    console.log(this.state.searchedMovieGenres);
 
   }
 }

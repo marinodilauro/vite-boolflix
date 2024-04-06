@@ -8,6 +8,27 @@
   section {
     margin: 3rem auto;
     width: 95%;
+
+    .filter_by_genres {
+      .genres {
+        .genre {
+          height: 30px;
+          padding: 10px;
+          border: 1px solid rgb(129, 129, 129);
+          border-radius: 20px;
+          background-color: rgb(15, 15, 15);
+          display: flex;
+          justify-content: center;
+          align-items: center;
+          font-size: 0.8rem;
+          line-height: 10px;
+
+          &:hover {
+            cursor: pointer;
+          }
+        }
+      }
+    }
   }
 
   section:first-child {

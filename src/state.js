@@ -10,6 +10,8 @@ export const state = reactive({
     movies: {},
     tvShows: {},
   },
+  searchedMovieGenres: [],
+  searchedTvShowsGenres: [],
 
   // API varaibles
 
