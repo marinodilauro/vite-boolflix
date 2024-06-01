@@ -13,15 +13,68 @@ export default {
       state,
       searchQuery: '',
       flag: '',
-      filtered: false
+      filtered: false,
+      filteredGenres: []
     }
   },
   methods: {
+    receiveMovieGenres() { },
+    receiveMovieActors() { },
+    receivetvShowGenres() { },
+    receiveTvShowActors() { },
+
+
     filterByGenres(genre) {
-      console.log(genre);
+
+      console.log(this.components);
+
+      let movies = this.state.APIresults.movies;
+      console.log(movies);
+
+      movies.forEach((movie, index) => {
+
+
+        console.log(movie['genre_ids']);
+        console.log(movie['genre_ids'].includes(genre));
+
+        if (movie['genre_ids'].includes(genre)) {
+
+          console.log(this.$refs.card[movie.index]);
+          console.log(movie);
+
+
+          console.log(this.$refs.card[movie.index].$data.movieGenres);
+          this.$refs.card[movie.index].$data.movieGenres = []
+          console.log(this.$refs.card[movie.index].$data.movieGenres);
+          this.$refs.card[movie.index].getMovieGenres(movie.id);
+          console.log(this.$refs.card[movie.index].$data.movieGenres);
+          this.$refs.card[movie.index].$data.movieGenres = this.$refs.card[movie.index].$data.movieGenres;
+          console.log(this.$refs.card[movie.index].$data.movieGenres);
+
+          console.log(this.$refs.card[movie.index].$data.movieMainActors);
+          this.$refs.card[movie.index].$data.movieMainActors = []
+          console.log(this.$refs.card[movie.index].$data.movieMainActors);
+          this.receiveMovieActors();
+          console.log(this.$refs.card[movie.index].$data.movieMainActors);
+
+          this.state.APIresults.movies = []
+
+          this.state.APIresults.movies.push(movie);
+
+        }
+      })
+
+      console.log(this.state.APIresults.movies);
+
+
     }
+
+  },
+  updated() {
+    // this.$refs.card[movie.index].getMovieGenres(movie.id);
   }
 }
+
 
 </script>
 
@@ -54,7 +107,9 @@ export default {
 
         <div class="col" v-for="element in result">
 
-          <Card :element="element" :type="type" />
+          <Card :element="element" :type="type" ref="card" @getMovieGenres="receiveMovieGenres"
+            @gettvShowGenres="receivetvShowGenres" @getMovieActors="receiveMovieActors"
+            @getTvShowActors="receiveTvShowActors" />
 
         </div>
 

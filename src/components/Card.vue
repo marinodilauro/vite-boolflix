@@ -4,6 +4,7 @@ import axios from 'axios';
 
 export default {
   name: 'Card',
+  emits: ['getMovieGenres', 'gettvShowGenres', 'getMovieActors', 'getTvShowActors'],
   data() {
     return {
       state,
@@ -15,7 +16,6 @@ export default {
       tvShowMainActors: [],
 
       // API varaibles
-
       details_api_url: 'https://api.themoviedb.org/3/',
       movie_api_url: 'movie/',
       tvShow_api_url: 'tv/',
@@ -68,6 +68,7 @@ export default {
     },
 
     async getMovieGenres(movieID) {
+      this.$emit('getMovieGenres');
 
       const url = `${this.details_api_url + this.movie_api_url + movieID + '?' + state.api_key}`;
 
@@ -76,26 +77,23 @@ export default {
 
           const genres = response.data.genres
 
-          console.log(genres);
+          //console.log(genres);
 
-          genres.forEach((genre, index) => {
+          genres.forEach(genre => {
+            //console.log(genre);
 
-            let genreName;
-
-            if (index < genres.length - 1) {
-              genreName = genre.name + ',';
-            } else {
-              genreName = genre.name;
+            if (!this.state.searchedMovieGenres.includes(genre.id)) {
+              // console.log(this.state.searchedMovieGenres.includes(genre.id));
+              // console.log(genre);
+              this.state.searchedMovieGenres.push(genre.id);
             }
 
-            if (!this.state.searchedMovieGenres.includes(genre.name)) {
-              this.state.searchedMovieGenres.push(genre.name)
-            }
+            // console.log(this.state.searchedMovieGenres);
+            this.movieGenres.push(genre.name)
+          })
 
-            this.movieGenres.push(genreName)
-          });
 
-          this.$emit('this.movieGenres');
+          //console.log(this.state.searchedMovieGenres);
           //console.log(this.movieMainActors);
 
         })
@@ -105,11 +103,8 @@ export default {
 
     },
 
-    emitGenre() {
-
-    },
-
     async gettvShowGenres(tvShowID) {
+      this.$emit('gettvShowGenres');
 
       const url = `${this.details_api_url + this.movie_api_url + tvShowID + '?' + state.api_key}`;
 
@@ -120,21 +115,13 @@ export default {
 
           // console.log(genres);
 
-          genres.forEach((genre, index) => {
+          genres.forEach((genre) => {
 
-            let genreName;
-
-            if (index < genres.length - 1) {
-              genreName = genre.name + ',';
-            } else {
-              genreName = genre.name;
+            if (!this.state.searchedTvShowsGenres.includes(genre)) {
+              this.state.searchedTvShowsGenres.push(genre)
             }
 
-            if (!this.state.searchedTvShowsGenres.includes(genre.name)) {
-              this.state.searchedTvShowsGenres.push(genre.name)
-            }
-
-            this.tvShowsGenres.push(genreName)
+            this.tvShowsGenres.push(genre.name)
 
           });
 
@@ -149,6 +136,7 @@ export default {
     },
 
     async getMovieActors(movieID) {
+      this.$emit('getMovieActors');
 
       const url = `${this.details_api_url + this.movie_api_url + movieID + '/credits?' + state.api_key}`;
 
@@ -183,6 +171,7 @@ export default {
     },
 
     async getTvShowActors(tvShowID) {
+      this.$emit('getTvShowActors');
 
       const url = `${this.details_api_url + this.tvShow_api_url + tvShowID + '/credits?' + state.api_key}`;
 
@@ -221,7 +210,7 @@ export default {
 
     if (this.type === 'movies') {
 
-      this.getMovieActors(this.state.APIresults.movies[this.element.index].id)
+      this.getMovieActors(this.state.APIresults.movies[this.element.index].id);
 
       this.getMovieGenres(this.state.APIresults.movies[this.element.index].id);
 
@@ -233,7 +222,9 @@ export default {
 
     }
 
-    console.log(this.state.searchedMovieGenres);
+
+
+    // console.log(this.state.searchedMovieGenres);
 
   }
 }
